@@ -7,7 +7,7 @@ function HomePage(props) {
 
     return (
             <DefaultLayout>
-                <Map />
+                    <Map />
             </DefaultLayout>
     )
 }

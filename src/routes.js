@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import LoginPage from './pages/Login'
 import SignupPage from './pages/Signup'
 import HomePage from './pages/Home'
+import ProfilePage from './pages/Profile'
 
 const PrivateRoute = ({ component: Component, ...rest}) => (
     <Route {...rest} render={
@@ -21,6 +22,7 @@ export default props => (
         <Route exact path="/" component={LoginPage} />
         <Route path="/register" component={SignupPage} />
         <PrivateRoute path="/home" component={HomePage} />
+        <PrivateRoute path="/profile" component={ProfilePage} />
         <Redirect from="*" to="/" />
     </Switch>
 )

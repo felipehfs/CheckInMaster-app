@@ -15,10 +15,12 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
+import BuildIcon from '@material-ui/icons/Build';
+import HomeIcon from '@material-ui/icons/Home';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp"
 import { withRouter } from 'react-router-dom'
+import PersonAddIcon from '@material-ui/icons/PersonAdd'
+import AddFriendDialog from './AddFriendDialog'
 
 const drawerWidth = 240;
 
@@ -82,6 +84,15 @@ function PersistentDrawerLeft(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [addFriendModal, setAddFriendModal] = React.useState(false);
+
+  function openAddFriendModal() {
+    setAddFriendModal(true);
+  }
+
+  function closeAddFriendModal() {
+    setAddFriendModal(false);
+  }
 
   function handleDrawerOpen() {
     setOpen(true);
@@ -137,12 +148,24 @@ function PersistentDrawerLeft(props) {
         </div>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        <ListItem button onClick={() => props.history.push("/home")}>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button onClick={openAddFriendModal}>
+              <ListItemIcon>
+                <PersonAddIcon />
+              </ListItemIcon>
+              <ListItemText primary="new Friend" />
+          </ListItem>
+          <ListItem button onClick={() => props.history.push("/profile")}>
+              <ListItemIcon>
+                <BuildIcon />
+              </ListItemIcon>
+              <ListItemText primary="Profile" />
+          </ListItem>
         </List>
         <Divider />
         <List>
@@ -162,6 +185,7 @@ function PersistentDrawerLeft(props) {
         <div className={classes.drawerHeader} />
         {props.children}
       </main>
+      <AddFriendDialog open={addFriendModal} handleClose={closeAddFriendModal}/>
     </div>
   );
 }
