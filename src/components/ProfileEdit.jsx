@@ -2,7 +2,7 @@ import React from 'react'
 import { Paper, Typography, TextField, Box, Button} from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
-import { APP_URI} from '../helpers/consts'
+import { APP_URI } from '../helpers/consts'
 
 const useStyles = makeStyles(theme => ({
     root: {
