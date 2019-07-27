@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     height: '100vh',
   },
+  danger: {
+    color: 'red'
+  },
   image: {
     backgroundImage: 'url(https://source.unsplash.com/random)',
     backgroundRepeat: 'no-repeat',
@@ -48,6 +51,7 @@ export default function SignInSide(props) {
   const classes = useStyles();
   const [password, setPassword] = React.useState('')
   const [email, setEmail] = React.useState('')
+  const [errors, setErrors] = React.useState(false)
 
   function handleSubmit(e) {
     e.preventDefault()
@@ -60,6 +64,7 @@ export default function SignInSide(props) {
         console.error(err)
         setPassword('')
         setEmail('')
+        setErrors(true)
       })
   }
 
@@ -103,6 +108,9 @@ export default function SignInSide(props) {
               id="password"
               autoComplete="current-password"
             />
+            { errors && <Typography component="p" className={classes.danger}>
+              Email or password wrong
+            </Typography>}
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
